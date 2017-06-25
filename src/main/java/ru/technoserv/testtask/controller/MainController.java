@@ -30,7 +30,6 @@ import java.util.zip.GZIPInputStream;
 //@RestController
 @Controller
 public class MainController {
-    //private static final String URL_PREFIX = "https://commoncrawl.s3.amazonaws.com/";
     static final String DEFAULT_URL = "crawl-data/CC-MAIN-2017-17/segments/1492917118310.2/wet/CC-MAIN-20170423031158-00013-ip-10-145-167-34.ec2.internal.warc.wet.gz";
     private static final String WET_DATA_BASE = "wet.paths.gz";
     private static final String ENCODING = "utf8";
@@ -150,13 +149,13 @@ public class MainController {
             int seed = wetUrls.size();
             Random rnd = new Random(seed);
 
-            wetUrl = wetUrls.get(rnd.nextInt());
+            wetUrl = wetUrls.get(rnd.nextInt() % wetUrls.size());
         }
         catch (IOException e) {
             wetUrl = DEFAULT_URL;
         }
 
-        return /*URL_PREFIX +*/ wetUrl;
+        return wetUrl;
     }
 
     /** Load wet url's base from resources */

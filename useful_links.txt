@@ -1,3 +1,4 @@
 checking travis config: http://lint.travis-ci.org/
 stream api: https://habrahabr.ru/company/luxoft/blog/270383/
 WARC parse example: https://github.com/Smerity/cc-warc-examples
+travis deploy: https://docs.travis-ci.com/user/deployment/heroku/
