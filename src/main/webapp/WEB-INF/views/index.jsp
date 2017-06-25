@@ -10,8 +10,7 @@
 
 <body>
 <spring:form method="post"  modelAttribute="task" action="find-phrase">
-  Выбрали для просмотра: <spring:label path="wetUrl" /> <br/>
-
+  Выбрали для просмотра: "${task.wetUrl}" <br/> <spring:hidden path="wetUrl" />
   Фраза для поиска: <spring:input path="phrase"/> <br/>
 
   <spring:button>Найти</spring:button>
