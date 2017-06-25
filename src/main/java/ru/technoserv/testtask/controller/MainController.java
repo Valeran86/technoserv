@@ -26,7 +26,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
 
-
+//@SpringBootApplication
+//@RestController
 @Controller
 public class MainController {
     //private static final String URL_PREFIX = "https://commoncrawl.s3.amazonaws.com/";
@@ -62,6 +63,10 @@ public class MainController {
 
         return modelAndView;
     }
+
+    /*public static void main(String[] args) {
+        SpringApplication.run(MainController.class, args);
+    }*/
 
     /** Getting search for param task */
     static SearchResult search(Task task) {
