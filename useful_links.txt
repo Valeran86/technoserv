@@ -1,0 +1,2 @@
+checking travis config: http://lint.travis-ci.org/
+stream api: https://habrahabr.ru/company/luxoft/blog/270383/
