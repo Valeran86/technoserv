@@ -26,8 +26,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
 
-//@SpringBootApplication
-//@RestController
 @Controller
 public class MainController {
     static final String DEFAULT_URL = "crawl-data/CC-MAIN-2017-17/segments/1492917118310.2/wet/CC-MAIN-20170423031158-00013-ip-10-145-167-34.ec2.internal.warc.wet.gz";
@@ -62,10 +60,6 @@ public class MainController {
 
         return modelAndView;
     }
-
-    /*public static void main(String[] args) {
-        SpringApplication.run(MainController.class, args);
-    }*/
 
     /** Getting search for param task */
     static SearchResult search(Task task) {
