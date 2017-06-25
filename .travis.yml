@@ -1,4 +1,9 @@
 language: java
 jdk:
-  - oraclejdk8
+- oraclejdk8
 script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+deploy:
+  provider: heroku
+  api_key:
+    secure: moDllSnkG81h48zusckRX2SbFUAYEquoKM1prFSdzOjiK5mrbupcg2erISNyiH/yfLtXroEWkScxky5nHdle6HxjPe5m0soREfceqKttCPp2zfe0+P4zNo953Suond4OECMaaIFrXVRU8JyfY0mrJaDyTBvR/qCCNaXJvMovTNLqMH5UKUL/SD9TaXfzcQlsQiPWWpC+tQUF/7nRuF/Z2oFVV2lKGU7c4cgzObYBY6X7JczMQH1gV27/6E6ITztmKWByPzDtKixgaVs61mS72ZUCoQCMSkcpZ6PuIy/r0GzP3Ex76DBy1bdsHfGTqB7oJikScKxePD9xGjDrd5z0l/NOSyPGtOU7R6iIZJQEwSFgB6KHYxdQSM7UNagvGYyALmkEhQ8f6U+Jio1PSU8Lev5172nm9i8kQh6FTy1iw9z1dhP4By/uLjccdE2M7qNmrFfTYvLLUWudaNonUi/pWjfjnYiEZMzvbRvJzSG2IqiHbAnUoA83wXseET2LR4pO8ntsKPsg42E3dLFbGxcvyHRFdJbPLuFCj+SIvmCyTy6TQyPp7MWzZHQ1Xc/ePsJu57qnvZaCZ4haOJaksBCDL4r/gz1O+bfUHjk8Z+MRwk1grG+Y2QOIi5i32bjvfhgylpgiSNnpRRdt94Tnu7QWRiIcqkL652ooV6haRbfx4Ps=
+  on: master
