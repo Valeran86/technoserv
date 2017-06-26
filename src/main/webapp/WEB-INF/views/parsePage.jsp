@@ -12,7 +12,7 @@
 Всего результатов: "${searchResult.pages.size()}"
 <br/>
     <c:forEach items="${searchResult.pages}" var="page">
-        ${page}<br>
+        <a href="${page}" target="_blank">${page}</a> <br>
     </c:forEach>
 </body>
 </html>
