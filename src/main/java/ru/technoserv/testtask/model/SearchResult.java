@@ -9,12 +9,12 @@ import java.util.List;
  */
 @Component
 public class SearchResult {
-    private List<Integer> pages;
+    private List<String> pages;
 
-    public List<Integer> getPages() {
+    public List<String> getPages() {
         return pages;
     }
-    public void setPages(List<Integer> pages) {
+    public void setPages(List<String> pages) {
         this.pages = pages;
     }
 }

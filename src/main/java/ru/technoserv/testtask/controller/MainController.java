@@ -19,9 +19,7 @@ import ru.technoserv.testtask.model.SearchResult;
 import ru.technoserv.testtask.model.Task;
 
 import java.io.*;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
@@ -66,16 +64,16 @@ public class MainController {
         Pattern pattern = Pattern.compile(task.getPhrase(), Pattern.CASE_INSENSITIVE);
 
         /* function style */
-        final int[] i = {0};
-        // for generating index use one threaded stream()
-        List<Page> pages = getPages(task).stream()
-                .map(s -> new Page(i[0]++, s))
-                .collect(Collectors.toList());
+        // for generating index use one threaded loading
+        List<Page> pages = getPages(task);
+
+        //point to use a DB for next queries but if use it - search should be in DB level too
+        //savePages2DB(pages);
 
         // now for searching can use parallel
-        List<Integer> pagesIndex = pages.parallelStream()
+        List<String> pagesIndex = pages.parallelStream()
                 .filter(p -> pattern.matcher(p.getContent()).find())
-                .map(Page::getIndex)
+                .map(Page::getUrl)
                 .collect(Collectors.toList());
 
         /* procedure style
@@ -95,8 +93,10 @@ public class MainController {
     }
 
     /** One thread parse and load pages */
-    private static List<String> getPages(Task task) {
-        List<String> pages = new LinkedList<>();
+    private static List<Page> getPages(Task task) {
+        Pattern urlStart = Pattern.compile("^https{0,1}://", Pattern.CASE_INSENSITIVE);
+
+        List<Page> pages = new LinkedList<>();
         ArchiveReader ar = getArchiveReader(task.getWetUrl());
 
         int maxLength = 10000;
@@ -110,7 +110,16 @@ public class MainController {
                 }
                 int actualRead = record.read(rawData, 0, available);
 
-                String page = new String(rawData, 0, actualRead);
+                String url = record.getHeader().getUrl();
+                if (url == null)
+                    url = "url is null!";
+                else if (!urlStart.matcher(url).find())
+                    url = "http://" + url;
+
+                Page page = new Page();
+                page.setUrl(url);
+                page.setContent(new String(rawData, 0, actualRead));
+
                 pages.add(page);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -140,10 +149,10 @@ public class MainController {
         String wetUrl;
         try {
             List<String> wetUrls = loadWetDataBase();
-            int seed = wetUrls.size();
+            long seed = new Date().getTime();
             Random rnd = new Random(seed);
 
-            wetUrl = wetUrls.get(rnd.nextInt() % wetUrls.size());
+            wetUrl = wetUrls.get(Math.abs(rnd.nextInt()) % wetUrls.size());
         }
         catch (IOException e) {
             wetUrl = DEFAULT_URL;

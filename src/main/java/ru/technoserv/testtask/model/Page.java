@@ -8,25 +8,25 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Page {
-    private int index;
+    private String url;
     private String content;
 
-    public Page(int index, String content) {
-        setIndex(index);
+    public Page() {
+        setUrl(url);
         setContent(content);
     }
 
-    public int getIndex() {
-        return index;
+    public String getUrl() {
+        return url;
     }
-    private void setIndex(int index) {
-        this.index = index;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getContent() {
         return content;
     }
-    private void setContent(String content) {
+    public void setContent(String content) {
         this.content = content;
     }
 }
